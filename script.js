@@ -1,6 +1,9 @@
 const buttons = document.querySelectorAll("button");
 let input = document.querySelector("input");
-input.value = "222+100"
+input.value = "222+100*3+100/2-22";
+const mainRepos = /(\d+)|[\/\*\-\+]/g;
+let value = input.value;
+let fullString = value.match(mainRepos);
 
 function startUp() {
   let columns = 1;
@@ -29,47 +32,71 @@ function screen(event) {
   let input = document.querySelector("input");
   input.value = input.value + event.target.className;
 }
+
 function calc() {
 
-  let repos = /^(\d+)[\/\*\-\+](\d+)$/;
-  let symbolRepos = /[\/\*\-\+]/;
-  let value = input.value;
-  let string = value.match(repos);
-  let symbol = string[0].match(symbolRepos);
-let a = Number(string[1]);
-let b = Number(string[2]);
-  switch (symbol[0]) 
+  for(let i = 0; i < fullString.length; i++)
   {
-    case "+":
-      console.log(addition(a, b));
-      break;
-      case "-":
-      console.log(subtraction(a, b));
-      break;
-      case "*":
-      console.log(multiplication(a, b));
-      break;
-      case "/":
-      console.log(division(a, b));
-      break;
+    console.log(i);
+    if(fullString[i] == "*")
+    {
+      let a = Number(fullString[i - 1]);
+      let b = Number(fullString[i + 1]);
+      multiplication(a, b, i);
+      i--;
+    }
+    else if(fullString[i] == "/")
+    {
+      let a = Number(fullString[i - 1]);
+      let b = Number(fullString[i + 1]);
+      division(a, b, i);
+      i--;
+    }
   }
+  for(let i = 0; i < fullString.length; i++)
+  {
+    if(fullString[i] == "+")
+    {
+      let a = Number(fullString[i - 1]);
+      let b = Number(fullString[i + 1]);
+      console.log("+");
+      addition(a, b, i);
+      i--;
+    }
+    else if(fullString[i] == "-")
+    {
+      let a = Number(fullString[i - 1]);
+      let b = Number(fullString[i + 1]);
+      subtraction(a, b, i);
+      i--;
+    }
+  }
+
 
 
   input.value = input.value = "";
 }
-function addition(a, b)
+function addition(a, b, i)
 {
-  return a + b;
+  let x = a + b;  
+  fullString.splice(i - 1, 3, x);
+  console.log(fullString);
 }
-function subtraction(a, b)
+function subtraction(a, b, i)
 {
-  return a - b;
+  let x = a - b;  
+  fullString.splice(i - 1, 3, x);
+  console.log(fullString);
 }
-function multiplication(a, b)
+function multiplication(a, b, i)
 {
-  return a * b;
+  let x = a * b;  
+  fullString.splice(i - 1, 3, x);
+  console.log(fullString);
 }
-function division(a, b)
+function division(a, b, i)
 {
-  return a / b;
+  let x = a / b;  
+  fullString.splice(i - 1, 3, x);
+  console.log(fullString);
 }
