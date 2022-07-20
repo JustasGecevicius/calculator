@@ -1,10 +1,11 @@
 const buttons = document.querySelectorAll("button");
-let input = document.querySelector("input");
-input.value = "222+100*3+100/2-22";
+const inputField = document.querySelector("input");
 const mainRepos = /(\d+)|[\/\*\-\+]/g;
-let value = input.value;
-let fullString = value.match(mainRepos);
+let fullArray;
+let displayed = false;
 
+
+//a function to set up the number grid and add the event listeners to the buttons
 function startUp() {
   let columns = 1;
   let rows = 2;
@@ -21,82 +22,114 @@ function startUp() {
     columns++;
   });
 }
+//initializing the startup sequence
 startUp();
 
+// a function to change what is displayed on the screen
 function screen(event) {
+  //if the = button was pressed launches the calc function
   if (event.target.className == "=") {
+    fullArray = inputField.value.match(mainRepos);
     calc();
     return;
   }
-  console.log(event.target.className);
-  let input = document.querySelector("input");
-  input.value = input.value + event.target.className;
+  // checks if the answer has been displayed previously if yes, clears the screen and resets the displayed variable
+  if(displayed == true)
+  {
+    inputField.value = "";
+    displayed = false;
+  }
+  //displays the typed numbers on the screen
+  inputField.value = inputField.value + event.target.className;
 }
 
 function calc() {
-
-  for(let i = 0; i < fullString.length; i++)
+  //two loops to go over the whole array of numbers and arithmetic symbols
+  //the first loop goes over the multiplication and division symbols;
+  for(let i = 0; i < fullArray.length; i++)
   {
     console.log(i);
-    if(fullString[i] == "*")
+    if(fullArray[i] == "*")
     {
-      let a = Number(fullString[i - 1]);
-      let b = Number(fullString[i + 1]);
+      let a = Number(fullArray[i - 1]);
+      let b = Number(fullArray[i + 1]);
       multiplication(a, b, i);
       i--;
     }
-    else if(fullString[i] == "/")
+    else if(fullArray[i] == "/")
     {
-      let a = Number(fullString[i - 1]);
-      let b = Number(fullString[i + 1]);
+      let a = Number(fullArray[i - 1]);
+      let b = Number(fullArray[i + 1]);
       division(a, b, i);
       i--;
     }
   }
-  for(let i = 0; i < fullString.length; i++)
+  //the second loop goes over the addition and subtraction symbols
+  for(let i = 0; i < fullArray.length; i++)
   {
-    if(fullString[i] == "+")
+    if(fullArray[i] == "+")
     {
-      let a = Number(fullString[i - 1]);
-      let b = Number(fullString[i + 1]);
+      let a = Number(fullArray[i - 1]);
+      let b = Number(fullArray[i + 1]);
       console.log("+");
       addition(a, b, i);
       i--;
     }
-    else if(fullString[i] == "-")
+    else if(fullArray[i] == "-")
     {
-      let a = Number(fullString[i - 1]);
-      let b = Number(fullString[i + 1]);
+      let a = Number(fullArray[i - 1]);
+      let b = Number(fullArray[i + 1]);
       subtraction(a, b, i);
       i--;
     }
   }
+  //displays the answer on the screen
+    inputField.value = fullArray[0];
+    displayed = true;
 
 
-
-  input.value = input.value = "";
 }
+
+//the mathematical functions
 function addition(a, b, i)
-{
-  let x = a + b;  
-  fullString.splice(i - 1, 3, x);
-  console.log(fullString);
+{ 
+  if(typeof a != "number" || typeof b != "number")
+  {
+    inputField.value = "ERROR STUPID"
+    return;
+  }
+  fullArray.splice(i - 1, 3, a + b);
 }
 function subtraction(a, b, i)
 {
+   
+  if(typeof a != "number" || typeof b != "number")
+  {
+    inputField.value = "ERROR STUPID"
+    return;
+  }
   let x = a - b;  
-  fullString.splice(i - 1, 3, x);
-  console.log(fullString);
+  fullArray.splice(i - 1, 3, x);
 }
 function multiplication(a, b, i)
 {
+   
+  if(typeof a != "number" || typeof b != "number")
+  {
+    inputField.value = "ERROR STUPID";
+    return;
+  }
   let x = a * b;  
-  fullString.splice(i - 1, 3, x);
-  console.log(fullString);
+  fullArray.splice(i - 1, 3, x);
 }
 function division(a, b, i)
 {
+   
+  if(typeof a != "number" || typeof b != "number")
+  {
+    inputField.value = "ERROR STUPID";
+    return;
+  }
   let x = a / b;  
-  fullString.splice(i - 1, 3, x);
-  console.log(fullString);
+  fullArray.splice(i - 1, 3, x);
 }
