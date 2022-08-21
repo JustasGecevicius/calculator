@@ -49,14 +49,14 @@ function calc() {
   for(let i = 0; i < fullArray.length; i++)
   {
     console.log(i);
-    if(fullArray[i] == "*")
+    if(fullArray[i] == "*" && i != 0)
     {
       let a = Number(fullArray[i - 1]);
       let b = Number(fullArray[i + 1]);
       multiplication(a, b, i);
       i--;
     }
-    else if(fullArray[i] == "/")
+    else if(fullArray[i] == "/" && i != 0)
     {
       let a = Number(fullArray[i - 1]);
       let b = Number(fullArray[i + 1]);
@@ -67,7 +67,7 @@ function calc() {
   //the second loop goes over the addition and subtraction symbols
   for(let i = 0; i < fullArray.length; i++)
   {
-    if(fullArray[i] == "+")
+    if(fullArray[i] == "+" && i != 0)
     {
       let a = Number(fullArray[i - 1]);
       let b = Number(fullArray[i + 1]);
@@ -75,7 +75,7 @@ function calc() {
       addition(a, b, i);
       i--;
     }
-    else if(fullArray[i] == "-")
+    else if(fullArray[i] == "-" && i != 0)
     {
       let a = Number(fullArray[i - 1]);
       let b = Number(fullArray[i + 1]);
@@ -84,7 +84,12 @@ function calc() {
     }
   }
   //displays the answer on the screen
+  if(typeof fullArray[0] != "number")
+  {
+    fullArray[0] = "Error";
+  }
     inputField.value = fullArray[0];
+
     displayed = true;
 
 

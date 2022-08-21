@@ -1,0 +1,45 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body{height: 100vh;
+display: flex; justify-content: center; align-items: center;}
+
+button{border-radius: 5px; font-size: 2rem;}
+input{border-radius: 5px; margin-bottom: 10px;}
+
+.calculator {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+
+  aspect-ratio: 1 / 1;
+  padding: min(30px, calc(100vw / 30));
+  background-color: grey;
+  gap: calc(100vw / 200);
+  border-radius: 5px;
+  height: 80vw;
+  max-height: 80vh;
+  border: solid black 1px;
+  box-shadow: 0px 5px 20px 1px;
+}
+
+input {
+  grid-column: 1 / -1;
+  grid-row: 1 / 1;
+  background-color: grey;
+  font-size: 2rem;
+  box-shadow: inset -1px -1px 5px;
+  padding-left: 5px;
+  font-size: 3rem;
+}
+@media (min-width: 600px) {
+  button{border-radius: 10px;} ;
+input{font-size: 3rem;}
+.calculator{border-radius: 10px;}
+
+}
