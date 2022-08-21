@@ -18,6 +18,8 @@ function startUp() {
     elem.style.gridRow = `${rows}`;
     elem.addEventListener("click", (e) => {
       screen(e);
+      elem.classList.add("buttonactive");
+      setTimeout(function elemremove (){elem.classList.remove("buttonactive")}, 100);
     });
     columns++;
   });
@@ -137,4 +139,8 @@ function division(a, b, i)
   }
   let x = a / b;  
   fullArray.splice(i - 1, 3, x);
+}
+
+let buttoneffect = function(e){
+  console.log(e);
 }
