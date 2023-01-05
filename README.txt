@@ -1,50 +1,31 @@
-This is the  calculator project.
+# Calculator App
 
-This calculator will include the following functions: addition, subtraction, multiplication and division
+## Description
 
-The project will be built in several stages:
+This is a calculator app that allows for a long string of calculations to be inputed. The string is then split into array elements. The element is either a number or a symbol. Then we loop through the array starting from the second element in the array because it is supposed to be a symbol and the i-1 and i+1 elements are supposed to be numbers. If the condition of (i -> symbol, i-1 and i+1 -> number) is not met the calculator throws an error. 
 
-stage 1: Create the main working prototype that works with two digits IE only does one thing at a time(subtraction, addition, multiplication, division)
+## Technologies Used
 
-stage 2: Update the prototype to accept multiple variables and do multiple actions;
+### `HTML/CSS`
 
-stage 3: Add the dot button to allow for decimal numbers and fix any errors
+In this app basic HTML and CSS were used to give the calculator some basic structure. Like puting the numbers into a grid and adding styling to the web page.
 
-stage 4: Complete the css for the project and format the javascript, slim down the functions
+### `Javascript`
 
-Sudo code:
+Vanilla Javascript was used for the main functionality of this project. I used methods like split(), splice() and loops to go through all the elements of array and perform the neccessary calculations. After each calculations the length of the array is reduced using splice until the length of the array becomes 1 and there is only the answer left. To go over the array there are two different loops. The first one is meant for multiplication and division and the second one for addition and subtraction. 
 
-let var = numberORActionRegex.match("the inout string from the user");
+## Problems encountered
 
-var = an array of numbers and arithmetic number;
+### Keeping track of the calculations
 
-since we want to do multiplication and division first we will look for those symbols first;
+At first I tried having the current total in a seperate variable and the initial array intact but then it was difficult to tell if the calculations were and and all the steps were taken. Then I decided to reduce the arrays length with each calculation so that I know all the calculations are completed when the length of the array reaches 0.
 
-for(let i = 0; i < var.length; i++)
-{
-    switch (i)
-    {
-        case "*":
-        return multiplication function(i-1, i+1);
-        case "/":
-        return division function(i-1, i+1);
-        default: return;
-    }
-}
-another loop to do the addition and subtraction
+### Allowing inputs of several calculations one after the other
 
-for(let i = 0; i < var.length; i++)
-{
-    switch (i)
-    {
-        case "*":
-        return addition function(i-1, i+1);
-        case "/":
-        return subtraction function(i-1, i+1);
-        default: return;
-    }
-}
+At first I tried using variables to store calculations but I quickly realised that this approach was not scalable and required too many code corrections for it to work. Then I moved to the array approach where the user input is split and stored in an array as either symbols or numbers and later looped through.
 
-in the arithmetic functions we will use the reduce method to shorten the main array and replace the 
-a + b with the answer, i for the loop will need to be set back by one IE i-- to make sure the loop
-doesnt skip over anything;
+## Final remarks
+
+Since this was one of my first projects that used Javascript it was slightly difficult to come up with the solutions to the problems mentioned above. Nevertheless after a few trials and error the solution provides basic functionality and treat with most of the errors. 
+
+
